@@ -24,4 +24,5 @@ class Member extends Model
     {
         return $this->belongsTo(Vikoba::class, 'vikoba_id');
     }
+  
 }

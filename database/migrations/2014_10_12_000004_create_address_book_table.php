@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('phonebook', function (Blueprint $table) {
+        Schema::create('addressbook', function (Blueprint $table) {
             $table->id();
-            $table->string('phone');
-            $table->boolean('verified');
+            $table->string('address');
+            $table->string('google_map_code')->nullable();
+            $table->string('longitude')->nullable();
+            $table->string('latitude')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -24,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('phonebook');
+        Schema::dropIfExists('addressbook');
     }
 };

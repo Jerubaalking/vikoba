@@ -13,14 +13,15 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->enum('status', ['Placed', 'Paying', 'Paid'])->default('placed');
+            $table->enum('status', ['Placed', 'Paying', 'Paid', 'unpayable', 'default'])->default('placed');
             $table->boolean('has_installments')->default(false);
             $table->enum('type', ['Installment', 'Fixed'])->default('Fixed');
             $table->string('code')->nullable();
             $table->double('amount_expected', null, 2)->default(0);
             $table->string('description');
-            $table->string('ip_address');
+            $table->string('ip_address')->nullable();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('vikoba_id')->constrained('vikobas')->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

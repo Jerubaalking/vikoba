@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('installments', function (Blueprint $table) {
-            $table->id();
-            $table->timestamp('dop')->nullableTimestamps();
-            $table->foreignId('order_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->double('amount', null, 2);
+        Schema::create('short_urls', function (Blueprint $table) { 
+            $table->increments('id');
+            $table->text('url');
+            $table->string('code')->unique();
+            $table->dateTime('expire_at')->nullable();
+            $table->integer('number_of_clicks')->default(0);
+            $table->nullableTimestamps();
             $table->softDeletes();
-            $table->timestamps();
         });
     }
 
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('installments');
+        Schema::dropIfExists('short_urls');
     }
 };

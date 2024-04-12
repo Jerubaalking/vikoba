@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        Schema::create('member_shares', function (Blueprint $table) {
             $table->id();
-            $table->double('amount', null, 2);
-            $table->enum('type', ['mobile', 'bank', 'card']);
-            $table->string('channel_id');
+            $table->integer('number_of_shares')->default(0);
+            $table->foreignId('member_id')->constrained('members')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('share_id')->constrained('shares')->onDelete('cascade')->onUpdate('cascade');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('transactions');
+        Schema::dropIfExists('member_shares');
     }
 };

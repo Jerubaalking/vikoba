@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('installments', function (Blueprint $table) {
+        Schema::create('user_phones', function (Blueprint $table) {
             $table->id();
-            $table->timestamp('dop')->nullableTimestamps();
-            $table->foreignId('order_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->double('amount', null, 2);
-            $table->softDeletes();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('phonebook_id')->constrained('phonebook')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('installments');
+        Schema::dropIfExists('user_phones');
     }
 };

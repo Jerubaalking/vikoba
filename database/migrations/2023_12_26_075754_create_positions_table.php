@@ -16,6 +16,11 @@ return new class extends Migration
             $table->string('title');
             $table->string('duties');
             $table->string('description');
+            $table->boolean('voted')->default(false);
+            $table->boolean('open')->default(false);
+            $table->timestamp('dov')->nullableTimestamps();
+            $table->timestamp('dos')->nullableTimestamps();
+            $table->timestamp('doe')->nullableTimestamps();
             $table->softDeletes();
             $table->timestamps();
         });

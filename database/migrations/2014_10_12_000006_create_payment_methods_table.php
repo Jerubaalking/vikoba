@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('address_book', function (Blueprint $table) {
+        Schema::create('payment_methods', function (Blueprint $table) {
             $table->id();
-            $table->string('address');
+            $table->string('name')->nullable();
+            $table->text('comment')->nullable();
+            $table->foreignId('provider_id')->constrained('payment_providers')->onDelete('cascade')->onUpdate('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -23,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('address_book');
+        Schema::dropIfExists('payment_methods');
     }
 };

@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('shares', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->double('value', null, 2)->default(0);
             $table->string('description');
             $table->foreignId('vikoba_id')->constrained('vikobas')->onDelete('cascade')->onUpdate('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

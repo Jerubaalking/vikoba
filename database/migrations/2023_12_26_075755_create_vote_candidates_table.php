@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('candate_code');
             $table->string('bio');
-            $table->string('status');
+            $table->text('promises')->nullable();
+            $table->boolean('active')->default(false);
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('position_id')->constrained('positions')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();

@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('installments', function (Blueprint $table) {
+        Schema::create('roles', function (Blueprint $table) {
             $table->id();
-            $table->timestamp('dop')->nullableTimestamps();
-            $table->foreignId('order_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->double('amount', null, 2);
+            $table->string('name');
+            $table->string('description');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('installments');
+        Schema::dropIfExists('roles');
     }
 };
